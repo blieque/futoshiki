@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Futoshiki</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Palanquin+Dark:400,700">
+        <script src="futoshiki.js"></script>
+    </head>
+    <body class="layout">
+        <section class="ribbon ribbon--1">
+            <div class="container">
+                <div class="container__stretcher"></div>
+                <div class="container__absolute"></div>
+            </div>
+        </section>
+        <section class="ribbon ribbon--2">
+            <div class="ribbon__content ribbon__content--unpadded range">
+                <div class="range__container">
+                    <div class="range__label">Puzzle size:</div>
+                    <div class="range__subcontainer">
+                        <div class="range__bar">
+                            <div class="range__step" data-value="3">3</div>
+                            <div class="range__step" data-value="4">4</div>
+                            <div class="range__step" data-value="5">5</div>
+                            <div class="range__step" data-value="6">6</div>
+                            <div class="range__step" data-value="7">7</div>
+                            <div class="range__step" data-value="8">8</div>
+                            <div class="range__step" data-value="9">9</div>
+                            <div class="range__head"></div>
+                        </div>
+                    </div>
+                </div>
+                <button class="button__inline">Generate</button>
+            </div>
+        </section>
+        <section class="ribbon ribbon--3">
+            <div class="ribbon__content ribbon__content--clear">
+                <p>Creation of <a href="https://blieque.co.uk/">Blieque</a> — <a href="https://github.com/blieque/futoshiki">Source code</a></p>
+            </div>
+        </section>
+    </body>
+</html>

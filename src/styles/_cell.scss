@@ -1,0 +1,190 @@
+.cell {
+    position: relative;
+    float: left;
+    width: 6rem;
+    height: 6rem;
+    box-shadow: inset 0 0 0 1px #444;
+    /* text-stroke is WebKit-only. Blurred text-shadow "stroke" looks like
+     * dogshit. This looks like slightly prettier dogshit. */
+    text-shadow:
+         0.1rem 0       #fff,
+         0.1rem 0.1rem  #fff,
+         0      0.1rem  #fff,
+         0.1rem -0.1rem #fff,
+         0      -0.1rem #fff,
+        -0.1rem -0.1rem #fff,
+        -0.1rem 0       #fff,
+        -0.1rem 0.1rem  #fff;
+    text-align: center;
+    font-family: 'palanquin dark',sans-serif;
+    font-size: 3rem;
+    line-height: 170%;
+    transition: all ease 0.2s;
+    z-index: 1;
+}
+.cell:not(:last-child) {
+    margin-right: 1rem;
+}
+.cell:not(.cell--given) {
+    cursor: pointer;
+}
+.cell::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    opacity: 0;
+    transition: all ease 0.2s;
+    z-index: -1;
+}
+
+.cell--incumbent {
+    color: #444;
+    text-shadow: none;
+    box-shadow: inset 0 0 0 1px #444;
+    background: #eee;
+    /*
+    text-shadow:
+         0.1rem 0       #444,
+         0.1rem 0.1rem  #444,
+         0      0.1rem  #444,
+         0.1rem -0.1rem #444,
+         0      -0.1rem #444,
+        -0.1rem -0.1rem #444,
+        -0.1rem 0       #444,
+        -0.1rem 0.1rem  #444;
+    */
+}
+.cell--incumbent::after {
+    opacity: 0 !important;
+}
+
+.cell--given {
+    font-weight: bold;
+    background: repeating-linear-gradient(
+        135deg,
+        #fafafa,
+        #fafafa 6.07px,
+        #ccc 6.07px,
+        #ccc 7.07px
+    );
+    box-shadow: inset 0 0 0 1px #aaa;
+}
+.cell--given::after {
+    display: none;
+}
+
+/**
+ * Color scheme
+ *  - Turquoise: 00e4e2, 05c6c3 (or 00d6d3)
+ *  - Azure:     61cef2, 3fb7eb
+ *  - Purplue:   759aec, 5177e2
+ *  - Pink:      cd7ff5, b65bef
+ *
+ *  x  | x sqrt(2)
+ *  --------------
+ *   1 | 1.41
+ *   2 | 2.83
+ *   3 | 4.24
+ *   4 | 5.66, 6.36
+ *   5 | 7.07
+ *   6 | 8.48
+ *   7 | 9.90
+ *   8 | 11.31
+ *   9 | 12.73
+ *  10 | 14.14
+ *  11 | 15.56
+ *  12 | 16.97
+ *  13 | 18.38
+ *  14 | 19.80
+ *  15 | 21.21
+ */
+
+.cell--value::after {
+    opacity: 1;
+}
+.cell--value-1::after {
+    background: repeating-linear-gradient(
+        135deg,
+        #00e4e2,
+        #00e4e2 10.14px,
+        transparent 10.14px,
+        transparent 14.14px
+    ), repeating-linear-gradient(
+        45deg,
+        #00e4e2,
+        #00e4e2 10.14px,
+        #fff 10.14px,
+        #fff 14.14px
+    );
+    box-shadow: inset 0 0 0 1px #05c6c3;
+}
+.cell--value-2::after {
+    background: repeating-linear-gradient(
+        135deg,
+        #61cef2,
+        #61cef2 1px,
+        transparent 1px,
+        transparent 5.98px,
+        #61cef2 5.98px,
+        #61cef2 8.48px
+    ), repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 11px,
+        #fff 11px,
+        #fff 12px
+    ), repeating-linear-gradient(
+        #61cef2,
+        #61cef2 11px,
+        #fff 11px,
+        #fff 12px
+    );
+    box-shadow: inset 0 0 0 1px #3fb7eb;
+}
+.cell--value-3::after {
+    background: repeating-linear-gradient(
+        45deg,
+        #759aec,
+        #759aec 4.49px,
+        transparent 4.49px,
+        transparent 8.49px
+    ), repeating-linear-gradient(
+        #759aec,
+        #759aec 5px,
+        #fff 5px,
+        #fff 6px
+    );
+    box-shadow: inset 0 0 0 1px #5177e2;
+}
+.cell--value-4::after {
+    background: repeating-linear-gradient(
+        135deg,
+        #fff,
+        #fff 0.5px,
+        transparent 0.5px,
+        transparent 9.4px,
+        #fff 9.4px,
+        #fff 9.9px
+    ), repeating-linear-gradient(
+        #cd7ff5,
+        #cd7ff5 5px,
+        transparent 5px,
+        transparent 9px,
+        #cd7ff5 9px,
+        #cd7ff5 14px
+    ), repeating-linear-gradient(
+        90deg,
+        #cd7ff5,
+        #cd7ff5 5px,
+        #fff 5px,
+        #fff 9px,
+        #cd7ff5 9px,
+        #cd7ff5 14px
+    );
+    box-shadow: inset 0 0 0 1px #b65bef;
+}

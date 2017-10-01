@@ -1,0 +1,40 @@
+.inequality {
+    display: block;
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    color: #fff;
+    background: #000;
+    border-radius: 1rem;
+    box-shadow: 0 0 0 .2rem #fff;
+    text-shadow: none;
+    font-size: 40%;
+    font-weight: normal;
+    line-height: 140%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.inequality--ltr::before {
+    content: '∧';
+    transform: rotate(-90deg);
+}
+.inequality--gtr::before {
+    transform: rotate(90deg);
+}
+.inequality--ltb::after {
+}
+.inequality--gtb::after {
+    transform: rotate(180deg);
+}
+
+/*
+.cell::before {
+    top: 2rem;
+    left: 5.5rem;
+}
+.cell::after {
+    top: 5.5rem;
+    left: 2rem;
+}
+*/

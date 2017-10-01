@@ -1,0 +1,35 @@
+/**
+ * The ribbons are the viewport-wide, coloured sections of the page, which act
+ * content wrappers.
+ */
+
+.ribbon {
+    padding: 4rem;
+}
+.ribbon:last-child {
+    flex: 1;
+}
+.ribbon--1 {
+    background: #255bd4;
+    z-index: 1;
+}
+.ribbon--2 {
+    padding-top: 11rem;
+    background: #d8cdcd;
+}
+.ribbon--3 {
+    padding: 0 4rem;
+    background: #ecdddd;
+}
+
+.ribbon__content {
+    margin: 0 auto;
+    padding: 2rem;
+    background: #fff;
+}
+.ribbon__content--unpadded {
+    padding: 0;
+}
+.ribbon__content--clear {
+    background: none;
+}

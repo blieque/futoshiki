@@ -1,0 +1,37 @@
+.container,
+.ribbon__content {
+    width: 60vh;
+    max-width: 100%;
+}
+
+
+.container {
+    margin: 0 auto -11rem;
+    background: #fff;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.container__stretcher {
+    padding: 100% 0 0;
+}
+
+.container__absolute {
+    padding: 4rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.container__row::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.container__row:not(:last-child) {
+    margin-bottom: 1rem;
+}

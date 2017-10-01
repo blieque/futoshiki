@@ -1,0 +1,17 @@
+/**
+ * Styles for the body element and various layout elements that aren't part of
+ * a specific component.
+ */
+
+* {
+    position: relative;
+    box-sizing: border-box;
+}
+.layout {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: 'cmu serif',sans-serif;
+    line-height: 140%;
+    min-height: 100vh;
+}

@@ -1,7 +1,7 @@
 {
   "name": "futoshiki",
   "version": "0.1.0",
-  "description": "A implementation of a Japanese number game with a focus on aesthetics.",
+  "description": "An implementation of a Japanese number game with a focus on aesthetics.",
   "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +12,8 @@
   },
   "keywords": [
     "futoshiki",
+    "futōshiki",
+    "不等式",
     "inequality",
     "game",
     "number",

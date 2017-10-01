@@ -49,7 +49,6 @@ module.exports = {
   },
   plugins: [
     new HTMLPlugin({
-      title: 'Futōshiki',
       template: 'src/index.html',
     }),
     new ExtractTextPlugin('[name]-[md5:contenthash:base64:8].css'),

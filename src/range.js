@@ -5,24 +5,33 @@ import { addEventListeners } from './util';
  */
 export default class Range {
     constructor(element) {
+        // Get UI element objects.
         this.el = {};
         this.el.container = Range._findContainerElement(element);
         this.el.head = this.el.container.querySelector('.range__head');
         this.el.bar = this.el.container.querySelector('.range__bar');
         this.el.steps = this.el.container.querySelectorAll('.range__step');
 
+        // Set some object properties based on the DOM.
         this.label = this.el.container.querySelector('.range__label').innerText;
-        this.steps = Array.from(this.el.steps).map(elStep => ({
+        const elStepsArr = Array.from(this.el.steps);
+        this.steps = elStepsArr.map(elStep => ({
             label: elStep.innerText,
             value: elStep.dataset.value,
         }));
+        elStepsArr.some((elStep, i) => {
+            if (elStep.dataset.default !== undefined) {
+                this.index = i;
+                return true;
+            }
+        });
 
+        // Add event listeners and create references to other handlers that are
+        // bound to the object for adding and removing by other code.
         this._onMouseMove = Range.onMouseMove.bind(this);
         this._onMouseUp = Range.onMouseUp.bind(this);
         addEventListeners(this.el.head, Range, this, [
             'onMouseDown',
-            //'onMouseMove',
-            //'onMouseUp',
         ]);
     }
 
@@ -52,7 +61,6 @@ export default class Range {
         let percentage = i / (this.steps.length - 1);
         percentage = Math.round(10000 * percentage) / 100;
         this.el.head.style.left = `${percentage}%`;
-        console.log(this.value);
     }
     get index() {
         return this._index;
@@ -61,8 +69,9 @@ export default class Range {
     /* EVENT HANDLERS */
 
     static onMouseDown(event) {
-        this.dragData = {
+        this._dragData = {
             startX: event.clientX,
+            startPercentage: this._index / (this.steps.length - 1),
             barWidth: this.el.bar.clientWidth,
             incumbentIndex: null,
         };
@@ -70,14 +79,18 @@ export default class Range {
         document.addEventListener('mouseup', this._onMouseUp);
     }
     static onMouseUp(event) {
-        delete this.dragData;
+        delete this._dragData;
         document.removeEventListener('mousemove', this._onMouseMove);
         document.removeEventListener('mouseup', this._onMouseUp);
     }
     static onMouseMove(event) {
-        const deltaX = event.clientX - this.dragData.startX;
+        const deltaX = event.clientX - this._dragData.startX;
 
-        let percentage = deltaX / this.dragData.barWidth;
+        // `percentage' represents the change in the head's position as a
+        // decimal, 1 being the width of the range bar. 1 is added to this so
+        // that modulus operations can be performed when the value would be
+        // negative. This is later subtracted again.
+        let percentage = (deltaX / this._dragData.barWidth) + 1;
         const roundingMultiple = 1 / (this.steps.length - 1);
         const percentageMod = percentage % roundingMultiple;
         if (percentageMod < roundingMultiple / 2) {
@@ -85,12 +98,16 @@ export default class Range {
         } else {
             percentage += roundingMultiple - percentageMod;
         }
+        // The starting `percentage' is added so that the head will move
+        // relative to its starting position rather than the start of the bar. 1
+        // is removed from the value as modulus operations are complete.
+        percentage += this._dragData.startPercentage - 1;
         percentage = Math.max(Math.min(percentage, 1), 0);
-        this.dragData.incumbentIndex =
+        this._dragData.incumbentIndex =
             Math.round(percentage * (this.steps.length - 1));
 
-        if (this.dragData.incumbentIndex !== this._index) {
-            this.index = this.dragData.incumbentIndex;
+        if (this._dragData.incumbentIndex !== this._index) {
+            this.index = this._dragData.incumbentIndex;
         }
     }
 }

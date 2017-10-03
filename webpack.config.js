@@ -13,6 +13,7 @@ module.exports = {
     hashDigestLength: 8,
     path: path.resolve(__dirname, 'dist'),
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -53,6 +54,7 @@ module.exports = {
     }),
     new ExtractTextPlugin('[name]-[md5:contenthash:base64:8].css'),
     new UglifyJsPlugin({
+      sourceMap: true,
       uglifyOptions: {
         output: {
           comments: 'all',
